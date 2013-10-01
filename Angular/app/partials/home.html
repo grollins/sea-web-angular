@@ -1,0 +1,29 @@
+  <!-- Home Partial -->
+<div style="margin-left:5%">
+
+  <h2>AngularJS Django-Rest-Framework Seed</h2>
+
+  <p>You are logged in as {{username}}.</p>
+  <button class="btn btn-danger" type="button" ng-click="logout()">Logout</button>
+
+  <table ng-show="jobs.length" cellspacing="5">
+    <tr align="left">
+      <th>Title</th>
+      <th>Owner</th>
+      <th>Created</th>
+    </tr>
+    <tr ng-repeat="job in jobs | filter:username">
+      <td>{{job.title}}</td>
+      <td>{{job.owner}}</td>
+      <td>{{job.created}}</td>
+    </tr>
+  </table>
+  <button class="btn btn-primary" type="button" ng-click="refreshJob()">Refresh</button>
+
+  <form>
+      <label>Title</label>
+      <input type="text" ng-model="newJob.title" required />
+      <input type="submit" value="Save" ng-click="saveJob()" />
+  </form>
+
+</div>
