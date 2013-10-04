@@ -10,12 +10,12 @@
     <tr align="left">
       <th>Title</th>
       <th>Owner</th>
-      <th>Created</th>
+      <th>Status</th>
     </tr>
     <tr ng-repeat="job in jobs | filter:username">
       <td>{{job.title}}</td>
       <td>{{job.owner}}</td>
-      <td>{{job.created}}</td>
+      <td>{{job.status}}</td>
     </tr>
   </table>
   <button class="btn btn-primary" type="button" ng-click="refreshJob()">Refresh</button>

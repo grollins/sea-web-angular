@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from .models import Job
 from .permissions import IsOwnerOrReadOnly
 from .serializers import JobSerializer, UserSerializer
+from .tasks import run_sea_calculation
 
 
 class JobViewSet(viewsets.ModelViewSet):
@@ -18,6 +19,11 @@ class JobViewSet(viewsets.ModelViewSet):
 
     def pre_save(self, obj):
         obj.owner = self.request.user
+
+    def post_save(self, obj, created=False):
+        if created:
+            obj.status = 'Queued'
+            run_sea_calculation.delay(obj.id)
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):

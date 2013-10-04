@@ -124,6 +124,8 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'jobs',
     'corsheaders',
+    'djcelery',
+    'celerytest'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -168,9 +170,9 @@ CORS_ORIGIN_WHITELIST = (
     'localhost/',
 )
 
-import os
-if os.environ.get('HEROKU'):  # heroku config:set HEROKU=1
-    import dj_database_url
-    DATABASES['default'] = dj_database_url.config()
-
 LOGIN_REDIRECT_URL = '/'
+
+import djcelery
+djcelery.setup_loader()
+
+BROKER_URL = 'amqp://guest:guest@localhost:5672/'

@@ -12,12 +12,14 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
         Token.objects.create(user=instance)
 
 class Job(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100, blank=True, default='')
     owner = models.ForeignKey('auth.User', related_name='jobs')
+    status = models.CharField(max_length=100, blank=True, default='New')
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ('created',)
+        ordering = ('created_on',)
 
     # def save(self, *args, **kwargs):
         # self.highlighted = highlight(self.code, lexer, formatter)
