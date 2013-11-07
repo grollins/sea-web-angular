@@ -125,7 +125,7 @@ INSTALLED_APPS = (
     'jobs',
     'corsheaders',
     'djcelery',
-    'celerytest'
+    'celerytest',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -139,14 +139,14 @@ LOGGING = {
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
-        }
+        },
     },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
     },
     'loggers': {
         'django.request': {

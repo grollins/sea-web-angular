@@ -8,7 +8,8 @@ class JobSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Job
-        fields = ('id', 'url', 'title', 'owner', 'status')
+        fields = ('id', 'url', 'title', 'status', 'owner', 'structure', 'topology')
+        read_only = ('status')
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
