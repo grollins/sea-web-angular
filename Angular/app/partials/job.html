@@ -1,0 +1,23 @@
+  <!-- Home Partial -->
+<div style="margin-left:5%">
+
+  <h2>SEA-web</h2>
+
+  <p>You are logged in as {{username}}.</p>
+  <button class="btn btn-danger" type="button" ng-click="logout()">Logout</button>
+
+  <table cellspacing="5">
+    <tr align="left">
+      <th>Title</th>
+      <th>Owner</th>
+      <th>Status</th>
+    </tr>
+    <tr>
+      <td>{{job_data.title}}</td>
+      <td>{{job_data.owner}}</td>
+      <td>{{job_data.status}}</td>
+    </tr>
+  </table>
+  <button class="btn btn-primary" type="button" ng-click="refreshJob()">Refresh</button>
+
+</div>

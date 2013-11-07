@@ -32,6 +32,44 @@ var controllersModule = angular.module('angularProject.controllers', [])
         $scope.jobs = [];
         $scope.users = [];
         $scope.username = User.username;
+        $scope.title = '';
+        $scope.structureFile = '';
+        $scope.topologyFile = '';
+
+        $scope.logout = function() {
+            User.username = '';
+            User.isLogged = false;
+            $http.defaults.headers.common['Authorization'] = ''
+            $location.path( "/login" );
+        };
+
+        $scope.saveJob = function() {
+            console.log($scope.title);
+            console.log($scope.structureFile);
+            console.log($scope.topologyFile);
+
+            var fd = new FormData();
+            fd.append("title", $scope.title);
+            fd.append("structure", $scope.structureFile);
+            fd.append("topology", $scope.topologyFile);
+
+            $http.post( "http://localhost:8001/jobs/", fd, {
+                headers: {'Content-Type': undefined},
+                transformRequest: angular.identity
+            }).
+            success(function(data, status, headers, config) {
+                $scope.status = status;
+                console.log("Job post success");
+                $scope.refreshJob();
+            }).
+            error(function(data, status, headers, config) {
+                $scope.status = status;
+                console.log("Job post failed");
+                console.log(data);
+                console.log(headers('Content-Type'));
+                console.log(config);
+            });
+        };
 
         $scope.refreshJob = function() {
             $http({method: 'GET', url: "http://localhost:8001/jobs/"}).
@@ -47,25 +85,33 @@ var controllersModule = angular.module('angularProject.controllers', [])
             });
         };
 
-        $scope.saveJob = function() {
-            console.log($scope.newJob);
-            $http({method: 'POST', url: "http://localhost:8001/jobs/", data: $scope.newJob}).
-            success(function(data, status) {
+        $scope.refreshJob();
+    })
+
+    .controller('jobCtrl', function($scope, $http, $location, $routeParams, User) {
+        $scope.jobId = $routeParams.jobId;
+
+        $scope.refreshJob = function() {
+            $http({method: 'GET', url: "http://localhost:8001/jobs/" + $scope.jobId + "/"}).
+            success(function(data, status, headers, config) {
                 $scope.status = status;
-                console.log("Job post success");
-                $scope.refreshJob();
+                $scope.job_data = data;
+                console.log("Job refresh success");
             }).
             error(function(data, status) {
+                $scope.job_data = data || "Job refresh failed";
                 $scope.status = status;
-                console.log("Job post failed");
+                console.log("Job refresh failed");
             });
         };
 
         $scope.logout = function() {
             User.username = '';
             User.isLogged = false;
+            $http.defaults.headers.common['Authorization'] = ''
             $location.path( "/login" );
-        }
+        };
 
         $scope.refreshJob();
+
     });

@@ -1,7 +1,7 @@
   <!-- Home Partial -->
 <div style="margin-left:5%">
 
-  <h2>AngularJS Django-Rest-Framework Seed</h2>
+  <h2>SEA-web</h2>
 
   <p>You are logged in as {{username}}.</p>
   <button class="btn btn-danger" type="button" ng-click="logout()">Logout</button>
@@ -13,7 +13,7 @@
       <th>Status</th>
     </tr>
     <tr ng-repeat="job in jobs | filter:username">
-      <td>{{job.title}}</td>
+      <td><a href="#/jobs/{{job.id}}/">{{job.title}}</a></td>
       <td>{{job.owner}}</td>
       <td>{{job.status}}</td>
     </tr>
@@ -21,8 +21,15 @@
   <button class="btn btn-primary" type="button" ng-click="refreshJob()">Refresh</button>
 
   <form>
-      <label>Title</label>
-      <input type="text" ng-model="newJob.title" required />
+      <label>Job Title</label>
+      <br>
+      <input type="text" ng-model="title" required />
+      <br>
+      <label>Structure File</label>
+      <input type="file" file="structureFile" required />
+      <br>
+      <label>Topology File</label>
+      <input type="file" file="topologyFile" required />
       <input type="submit" value="Save" ng-click="saveJob()" />
   </form>
 

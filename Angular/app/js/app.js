@@ -16,9 +16,15 @@ angular.module('angularProject', ['ngRoute', 'angularProject.services', 'angular
           templateUrl: 'partials/login.html',
           controller: 'loginCtrl'
       })
+      .when('/jobs/:jobId', {
+          title: 'Job',
+          templateUrl: 'partials/job.html',
+          controller: 'jobCtrl'
+      })
       .otherwise({redirectTo: '/home'});
   }])
   .run( function($rootScope, $location, User) {
+      console.log();
       // register listener to watch route changes
       $rootScope.$on( "$routeChangeStart", function(event, next, current) {
           if ( User.isLogged == false ) {
