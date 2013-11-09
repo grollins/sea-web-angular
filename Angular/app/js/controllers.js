@@ -114,4 +114,14 @@ var controllersModule = angular.module('angularProject.controllers', [])
 
         $scope.refreshJob();
 
+    })
+
+    .controller('headerCtrl', function($scope, $location, User) {
+        $scope.isActive = function (viewLocation) { 
+            return viewLocation === $location.path();
+        };
+
+        $scope.isLoggedIn = function () {
+            return User.isLogged;
+        };
     });

@@ -1,16 +1,6 @@
-  <!-- Home Partial -->
-<div style="margin-left:5%">
-
-  <h2>SEA-web</h2>
-
-  <form>
-      <label>Username</label>
-      <input type='text' ng-model='username'>
-      <br>
-      <label>Password</label>
-      <input type='password' ng-model='password'>
-      <br>
-      <input type='submit' ng-click="login()">
-  </form>
-
-</div>
+<form class="form-signin">
+    <h2 class="form-signin-heading">Please sign in</h2>
+    <input ng-model='username' type="text" class="form-control" placeholder="Email address" required autofocus>
+    <input ng-model='password' type="password" class="form-control" placeholder="Password" required>
+    <button ng-click="login()" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+</form>
