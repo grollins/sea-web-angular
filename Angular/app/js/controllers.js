@@ -36,13 +36,6 @@ var controllersModule = angular.module('angularProject.controllers', [])
         $scope.structureFile = '';
         $scope.topologyFile = '';
 
-        $scope.logout = function() {
-            User.username = '';
-            User.isLogged = false;
-            $http.defaults.headers.common['Authorization'] = ''
-            $location.path( "/login" );
-        };
-
         $scope.saveJob = function() {
             console.log($scope.title);
             console.log($scope.structureFile);
@@ -105,18 +98,11 @@ var controllersModule = angular.module('angularProject.controllers', [])
             });
         };
 
-        $scope.logout = function() {
-            User.username = '';
-            User.isLogged = false;
-            $http.defaults.headers.common['Authorization'] = ''
-            $location.path( "/login" );
-        };
-
         $scope.refreshJob();
 
     })
 
-    .controller('headerCtrl', function($scope, $location, User) {
+    .controller('headerCtrl', function($scope, $http, $location, User) {
         $scope.isActive = function (viewLocation) { 
             return viewLocation === $location.path();
         };
@@ -124,4 +110,12 @@ var controllersModule = angular.module('angularProject.controllers', [])
         $scope.isLoggedIn = function () {
             return User.isLogged;
         };
+
+        $scope.logout = function() {
+            User.username = '';
+            User.isLogged = false;
+            $http.defaults.headers.common['Authorization'] = ''
+            $location.path( "/login" );
+        };
+
     });

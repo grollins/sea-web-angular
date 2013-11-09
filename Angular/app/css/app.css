@@ -23,6 +23,10 @@ body {
   padding-bottom: 19px;
 }
 
+a.logout:hover {
+    color: red;
+}
+
 /* Custom page footer */
 .footer {
     margin-top: 100px;
@@ -49,8 +53,12 @@ body {
     margin-bottom: 15px;
 }
 
-.dashboard table thead>tr>th {
+#job-list table thead>tr>th {
     padding-top: 0px;
+}
+
+#job-list {
+    padding-right: 50px;
 }
 
 /* Responsive: Portrait tablets and up */

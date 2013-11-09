@@ -1,27 +1,23 @@
 <div class="row dashboard">
-    <div class="col-lg-6">
+    <div class="col-lg-6" id="job-list">
         <h2>Your SEA jobs</h2>
         <table ng-show="jobs.length" class="table table-striped">
             <thead>
                 <tr>
                     <th>Title</th>
-                    <th>Owner</th>
                     <th>Status</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="job in jobs | filter:username">
                     <td><a href="#/jobs/{{job.id}}/">{{job.title}}</a></td>
-                    <td>{{job.owner}}</td>
                     <td>{{job.status}}</td>
                 </tr>
             </tbody>
         </table>
         <button class="btn btn-default" type="button" ng-click="refreshJob()">Refresh Job List</button>
-        <p>You are logged in as {{username}}.</p>
-        <button class="btn btn-danger" type="button" ng-click="logout()">Logout</button>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6" id="job-submission">
         <h2>Submit a new job</h2>
         <form role="form">
             <div class="form-group">
