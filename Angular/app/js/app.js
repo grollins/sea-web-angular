@@ -21,6 +21,16 @@ angular.module('angularProject', ['ngRoute', 'angularProject.services', 'angular
           templateUrl: 'partials/job.html',
           controller: 'jobCtrl'
       })
+      .when('/about', {
+          title: 'About',
+          templateUrl: 'partials/about.html',
+          controller: 'aboutCtrl'
+      })
+      .when('/contact', {
+          title: 'Contact',
+          templateUrl: 'partials/contact.html',
+          controller: 'contactCtrl'
+      })
       .otherwise({redirectTo: '/home'});
   }])
   .run( function($rootScope, $location, User) {

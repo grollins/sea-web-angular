@@ -102,6 +102,12 @@ var controllersModule = angular.module('angularProject.controllers', [])
 
     })
 
+    .controller('aboutCtrl', function($scope) {
+    })
+
+    .controller('contactCtrl', function($scope) {
+    })
+
     .controller('headerCtrl', function($scope, $http, $location, User) {
         $scope.isActive = function (viewLocation) { 
             return viewLocation === $location.path();
