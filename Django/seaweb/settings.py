@@ -1,3 +1,21 @@
+from os.path import abspath, basename, dirname, join, normpath
+from sys import path
+
+########## PATH CONFIGURATION
+# Absolute filesystem path to the Django project directory:
+DJANGO_ROOT = dirname(abspath(__file__))
+
+# Absolute filesystem path to the top-level project folder:
+SITE_ROOT = dirname(DJANGO_ROOT)
+
+# Site name:
+SITE_NAME = basename(DJANGO_ROOT)
+
+# Add our project to our pythonpath, this way we don't need to type our project
+# name in our dotted import paths:
+path.append(DJANGO_ROOT)
+########## END PATH CONFIGURATION
+
 # Django settings for tutorial project.
 
 DEBUG = True
@@ -56,7 +74,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = normpath(join(SITE_ROOT, 'assets'))
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -64,6 +82,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    normpath(join(SITE_ROOT, 'static')),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -104,6 +123,7 @@ ROOT_URLCONF = 'seaweb.urls'
 WSGI_APPLICATION = 'seaweb.wsgi.application'
 
 TEMPLATE_DIRS = (
+    normpath(join(SITE_ROOT, 'templates')),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -126,6 +146,7 @@ INSTALLED_APPS = (
     'corsheaders',
     'djcelery',
     'celerytest',
+    'registration'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -170,9 +191,15 @@ CORS_ORIGIN_WHITELIST = (
     'localhost/',
 )
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/accounts/home'
 
 import djcelery
 djcelery.setup_loader()
 
 BROKER_URL = 'amqp://guest:guest@localhost:5672/'
+
+# registration
+ACCOUNT_ACTIVATION_DAYS = 3
+
+EMAIL_HOST = "localhost"
+EMAIL_PORT = 1025
