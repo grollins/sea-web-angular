@@ -32,19 +32,25 @@ var controllersModule = angular.module('angularProject.controllers', [])
         $scope.jobs = [];
         $scope.users = [];
         $scope.username = User.username;
-        $scope.title = '';
-        $scope.structureFile = '';
-        $scope.topologyFile = '';
+        // $scope.title = '';
+        // $scope.structureFile = '';
+        // $scope.topologyFile = '';
 
-        $scope.saveJob = function() {
-            console.log($scope.title);
-            console.log($scope.structureFile);
-            console.log($scope.topologyFile);
+        var defaultForm = {
+            title : "",
+            structureFile : "",
+            topologyFile : ""
+        };
+
+        $scope.saveJob = function(job) {
+            // console.log(job.title);
+            // console.log(job.structureFile);
+            // console.log(job.topologyFile);
 
             var fd = new FormData();
-            fd.append("title", $scope.title);
-            fd.append("structure", $scope.structureFile);
-            fd.append("topology", $scope.topologyFile);
+            fd.append("title", job.title);
+            fd.append("structure", job.structureFile);
+            fd.append("topology", job.topologyFile);
 
             $http.post( "http://localhost:8001/jobs/", fd, {
                 headers: {'Content-Type': undefined},
@@ -62,6 +68,8 @@ var controllersModule = angular.module('angularProject.controllers', [])
                 console.log(headers('Content-Type'));
                 console.log(config);
             });
+            $scope.jobForm.$setPristine();
+            $scope.job = defaultForm;
         };
 
         $scope.refreshJob = function() {
