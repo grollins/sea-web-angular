@@ -35,5 +35,6 @@ def run_sea_calculation(job_id):
 
     sleep(10.) # seconds
     job.status = status
+    job.output = output_str
     job.save()
     return "%s\n%s" % (status, output_str)

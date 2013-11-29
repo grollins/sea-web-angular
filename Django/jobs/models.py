@@ -19,6 +19,7 @@ class Job(models.Model):
     status = models.CharField(max_length=100, blank=True, default='New')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+    output = models.TextField(blank=True, default=' ')
 
     class Meta:
         ordering = ('created_on',)
