@@ -19,16 +19,19 @@ class Job(models.Model):
     status = models.CharField(max_length=100, blank=True, default='New')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-    output = models.TextField(blank=True, default=' ')
 
     class Meta:
         ordering = ('created_on',)
 
-    # def save(self, *args, **kwargs):
-        # self.highlighted = highlight(self.code, lexer, formatter)
-        # super(Snippet, self).save(*args, **kwargs)
 
-        # limit the number of instances retained
-        # snippets = Snippet.objects.all()
-        # if len(snippets) > 100:
-            # snippets[0].delete()
+class Result(models.Model):
+    job = models.ForeignKey('Job', related_name='result')
+    gb = models.FloatField(default=0.0)
+    non_polar = models.FloatField(default=0.0)
+    reaction_field = models.FloatField(default=0.0)
+    solvent_intershell = models.FloatField(default=0.0)
+    solvent_intrashell = models.FloatField(default=0.0)
+    solvent_solute = models.FloatField(default=0.0)
+    total = models.FloatField(default=0.0)
+    sasa = models.FloatField(default=0.0)
+    shell_zero_waters = models.FloatField(default=0.0)

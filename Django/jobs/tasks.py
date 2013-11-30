@@ -2,7 +2,8 @@ from celery import task
 from time import sleep
 import subprocess
 import os.path
-from .models import Job
+from .models import Job, Result
+from .parser import parse_sea_output
 
 SEA_PATH = os.path.expanduser("~/SEA")
 
@@ -27,6 +28,8 @@ def run_sea_calculation(job_id):
     arg_list = [solvate_cmd, input_flag, input_path]
     try:
         output_str = subprocess.check_output(arg_list, stderr=subprocess.STDOUT)
+        output = parse_sea_output(output_str)
+        create_result_obj(job, output)
         status = 'Done'
     except subprocess.CalledProcessError, e:
         output_str = "There was an error:\n%s" % e.output
@@ -35,6 +38,9 @@ def run_sea_calculation(job_id):
 
     sleep(10.) # seconds
     job.status = status
-    job.output = output_str
     job.save()
     return "%s\n%s" % (status, output_str)
+
+def create_result_obj(job, output):
+    r = Result.objects.create(job=job, **output)
+    return

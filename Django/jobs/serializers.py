@@ -1,15 +1,21 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Job
+from .models import Job, Result
+
+
+class ResultSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Result
 
 
 class JobSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.Field(source='owner.username')
+    result = ResultSerializer(read_only=True)
 
     class Meta:
         model = Job
-        fields = ('id', 'url', 'title', 'status', 'owner', 'structure', 'topology', 'output')
-        read_only = ('status')
+        fields = ('id', 'url', 'title', 'status', 'owner', 'structure', 'topology', 'result')
+        read_only_fields = ('status',)
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
