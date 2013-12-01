@@ -4,8 +4,12 @@ body {
   padding-bottom: 20px;
 }
 
+ul {
+    list-style-type: none;
+}
+
 /* side spacing for mobile first views */
-.header, .footer, .dashboard {
+.header, .footer, .main {
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -45,20 +49,39 @@ a.logout:hover {
   margin: 30px 0;
 }
 
-.dashboard {
+.main {
   margin: 40px 0;
 }
 
-.dashboard h2 {
-    margin-bottom: 15px;
+.main .row {
+    margin-bottom: 10px;
 }
 
-#job-list table thead>tr>th {
+#home-col-head h2 {
+    margin-bottom: 10px;
+}
+
+#home-jobs-list table thead>tr>th {
     padding-top: 0px;
 }
 
-#job-list {
+#home-jobs-list {
     padding-right: 50px;
+}
+
+#job-details-header ul {
+    display: inline;
+    padding: 0px;
+}
+
+#job-details-header ul li {
+    display: inherit;
+    padding-right: 10px;
+    font-size: 30px;
+}
+
+#job-details-results table {
+    font-size: 18px;
 }
 
 #contact h2 {
@@ -73,7 +96,7 @@ a.logout:hover {
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
-  .header, .footer, .dashboard {
+  .header, .footer, .main {
     padding-left: 0;
     padding-right: 0;
   }

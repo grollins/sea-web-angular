@@ -1,6 +1,13 @@
-<div class="row dashboard">
-    <div class="col-lg-6" id="job-list">
+<div class="row" id="home-col-head">
+    <div class="col-lg-6">
         <h2>Your SEA jobs</h2>
+    </div>
+    <div class="col-lg-6">
+        <h2>Submit a new job</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6" id="home-jobs-list">
         <table ng-show="jobs.length" class="table table-striped">
             <thead>
                 <tr>
@@ -17,8 +24,7 @@
         </table>
         <button class="btn btn-default" type="button" ng-click="refreshJob()">Refresh Job List</button>
     </div>
-    <div class="col-lg-6" id="job-submission">
-        <h2>Submit a new job</h2>
+    <div class="col-lg-6" id="home-job-submission">
         <form name="jobForm" novalidate>
             <div class="form-group">
                 <label>Job Title</label>
