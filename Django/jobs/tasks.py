@@ -1,7 +1,11 @@
-from celery import task
-from time import sleep
 import subprocess
 import os.path
+from celery import task
+from time import sleep
+from tempfile import mkdtemp
+from shutil import copyfile, rmtree
+import logging
+
 from .models import Job, Result
 from .parser import parse_sea_output
 
@@ -22,9 +26,17 @@ def run_simple_calculation(job_id):
 @task()
 def run_sea_calculation(job_id):
     job = Job.objects.get(pk=job_id)
+    temp_dir = mkdtemp()
+    temp_path = os.path.join(temp_dir, 'struct')
+    temp_struct_path = temp_path + '.gro'
+    temp_topo_path = temp_path + '.top'
+    copyfile(job.structure.path, temp_struct_path)
+    copyfile(job.topology.path, temp_topo_path)
     solvate_cmd = os.path.join(SEA_PATH, "bin", "solvate")
     input_flag = "-s"
-    input_path = os.path.join(SEA_PATH, "examples", "methane")
+    # input_path = os.path.join(SEA_PATH, "examples", "methane")
+    input_path = temp_path
+    # logging.info( "%s" % input_path )
     arg_list = [solvate_cmd, input_flag, input_path]
     try:
         output_str = subprocess.check_output(arg_list, stderr=subprocess.STDOUT)
@@ -39,6 +51,7 @@ def run_sea_calculation(job_id):
     sleep(10.) # seconds
     job.status = status
     job.save()
+    rmtree(temp_dir)
     return "%s\n%s" % (status, output_str)
 
 def create_result_obj(job, output):
