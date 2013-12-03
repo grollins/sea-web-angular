@@ -69,6 +69,12 @@ a.logout:hover {
     padding-right: 50px;
 }
 
+#job-details {
+    max-width: 400px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
 #job-details-header ul {
     display: inline;
     padding: 0px;
