@@ -33,20 +33,27 @@ var controllersModule = angular.module('angularProject.controllers', [])
         $scope.users = [];
         $scope.username = User.username;
 
-        $scope.options = {
-            iterations: [10, 25, 50, 100],
+        $scope.job = {
+            title: "",
+            structureFile: null,
+            topologyFile: null,
+            iterations: 10,
         };
 
-        $scope.saveJob = function(job) {
-            console.log(job.title);
-            console.log(job.iterations);
-            // console.log(job.structureFile);
-            // console.log(job.topologyFile);
+        $scope.options = {
+            iterations: [10, 25, 50, 100, 500],
+        };
+
+        $scope.saveJob = function() {
+            console.log($scope.job.title);
+            console.log($scope.job.iterations);
+            // console.log($scope.job.structureFile);
+            // console.log($scope.job.topologyFile);
 
             var fd = new FormData();
-            fd.append("title", job.title);
-            fd.append("structure", job.structureFile);
-            fd.append("topology", job.topologyFile);
+            fd.append("title", $scope.job.title);
+            fd.append("structure", $scope.job.structureFile);
+            fd.append("topology", $scope.job.topologyFile);
 
             $http.post( "http://localhost:8001/jobs/", fd, {
                 headers: {'Content-Type': undefined},

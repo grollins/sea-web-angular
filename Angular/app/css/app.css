@@ -87,6 +87,10 @@ a.logout:hover {
     padding-right: 50px;
 }
 
+#home-job-submission .job-input {
+    padding-top: 7px;
+}
+
 #job-details {
     max-width: 400px;
     padding: 15px;
