@@ -54,6 +54,7 @@ var controllersModule = angular.module('angularProject.controllers', [])
             fd.append("title", $scope.job.title);
             fd.append("structure", $scope.job.structureFile);
             fd.append("topology", $scope.job.topologyFile);
+            fd.append("iterations", $scope.job.iterations);
 
             $http.post( "http://localhost:8001/jobs/", fd, {
                 headers: {'Content-Type': undefined},

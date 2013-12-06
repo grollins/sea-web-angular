@@ -33,11 +33,9 @@ def run_sea_calculation(job_id):
     copyfile(job.structure.path, temp_struct_path)
     copyfile(job.topology.path, temp_topo_path)
     solvate_cmd = os.path.join(SEA_PATH, "bin", "solvate")
-    input_flag = "-s"
-    # input_path = os.path.join(SEA_PATH, "examples", "methane")
     input_path = temp_path
-    # logging.info( "%s" % input_path )
-    arg_list = [solvate_cmd, input_flag, input_path]
+    arg_list = [solvate_cmd, "-s", input_path, "-i", str(job.iterations)]
+    logging.info( "%s" % ' '.join(arg_list))
     try:
         output_str = subprocess.check_output(arg_list, stderr=subprocess.STDOUT)
         output = parse_sea_output(output_str)

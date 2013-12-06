@@ -15,6 +15,7 @@ class Job(models.Model):
     title = models.CharField(max_length=100, blank=True, default='')
     structure = models.FileField(upload_to='tmp/%Y/%m/%d')
     topology = models.FileField(upload_to='tmp/%Y/%m/%d')
+    iterations = models.IntegerField(default=10)
     owner = models.ForeignKey('auth.User', related_name='jobs')
     status = models.CharField(max_length=100, blank=True, default='New')
     created_on = models.DateTimeField(auto_now_add=True)
