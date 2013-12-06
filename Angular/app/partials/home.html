@@ -38,6 +38,10 @@
                 <label>Topology File</label>
                 <input type="file" file="job.topologyFile" required />
             </div>
+            <div class="form-group">
+                <label>Iterations:</label>
+                <select ng-model="job.iterations" ng-options="choice for choice in options.iterations"></select>
+            </div>
             <button type="submit" class="btn btn-default" ng-click="saveJob(job)">Submit</button>
         </form>
     </div>

@@ -33,8 +33,13 @@ var controllersModule = angular.module('angularProject.controllers', [])
         $scope.users = [];
         $scope.username = User.username;
 
+        $scope.options = {
+            iterations: [10, 25, 50, 100],
+        };
+
         $scope.saveJob = function(job) {
-            // console.log(job.title);
+            console.log(job.title);
+            console.log(job.iterations);
             // console.log(job.structureFile);
             // console.log(job.topologyFile);
 
