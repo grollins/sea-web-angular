@@ -32,15 +32,6 @@ var controllersModule = angular.module('angularProject.controllers', [])
         $scope.jobs = [];
         $scope.users = [];
         $scope.username = User.username;
-        // $scope.title = '';
-        // $scope.structureFile = '';
-        // $scope.topologyFile = '';
-
-        var defaultForm = {
-            title : "",
-            structureFile : "",
-            topologyFile : ""
-        };
 
         $scope.saveJob = function(job) {
             // console.log(job.title);
@@ -69,7 +60,7 @@ var controllersModule = angular.module('angularProject.controllers', [])
                 console.log(config);
             });
             $scope.jobForm.$setPristine();
-            $scope.job = defaultForm;
+            $scope.job.title = '';
         };
 
         $scope.refreshJob = function() {
