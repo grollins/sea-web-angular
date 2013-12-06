@@ -21,6 +21,10 @@ ul {
     list-style-type: none;
 }
 
+.glyphicon {
+    margin-right: 5px;
+}
+
 /* side spacing for mobile first views */
 .header, .footer, .main {
   padding-left: 15px;
