@@ -1,6 +1,6 @@
 import subprocess
 import os.path
-from celery import task
+from celery import shared_task
 from time import sleep
 from tempfile import mkdtemp
 from shutil import copyfile, rmtree
@@ -11,7 +11,7 @@ from .parser import parse_sea_output
 
 SEA_PATH = os.path.expanduser("~/SEA")
 
-@task()
+@shared_task()
 def run_simple_calculation(job_id):
     job = Job.objects.get(pk=job_id)
     with open(job.structure.name, 'r') as f:
@@ -23,7 +23,7 @@ def run_simple_calculation(job_id):
     job.save()
     return num_lines
 
-@task()
+@shared_task()
 def run_sea_calculation(job_id):
     job = Job.objects.get(pk=job_id)
     temp_dir = mkdtemp()

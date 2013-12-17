@@ -144,8 +144,6 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'jobs',
     'corsheaders',
-    'djcelery',
-    'celerytest',
     'registration'
 )
 
@@ -193,8 +191,8 @@ CORS_ORIGIN_WHITELIST = (
 
 LOGIN_REDIRECT_URL = '/accounts/home'
 
-import djcelery
-djcelery.setup_loader()
+# import djcelery
+# djcelery.setup_loader()
 
 BROKER_URL = 'amqp://guest:guest@localhost:5672/'
 
