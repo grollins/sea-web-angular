@@ -24,5 +24,27 @@ angular.module('seaWebApp')
               User.isLogged = false;
               User.username = '';
           });
-      }
+      };
+
+      $scope.personaLogin = function() {
+          navigator.id.get(function(assertion) {
+              var verifyConfig = {
+                  url: "http://127.0.0.1:8001/verify",
+                  data: {'assertion':assertion},
+                  headers: {'Content-type': 'application/x-www-form-urlencoded'}
+              };
+              $http.post(verifyConfig)
+              .success(function(data, status, headers, config) {
+                  console.log('Successful login');
+                  User.isLogged = true;
+                  User.username = data.username;
+                  $location.path( "/home" );
+              })
+              .error(function(response) {
+                  console.log('Failed login');
+                  User.isLogged = false;
+                  User.username = '';
+              });
+          });
+      };
   });
