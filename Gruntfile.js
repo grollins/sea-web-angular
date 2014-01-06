@@ -29,7 +29,7 @@ module.exports = function (grunt) {
     watch: {
       js: {
         files: ['{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all']
+        tasks: []
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
@@ -362,7 +362,6 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
     'test',
     'build'
   ]);
