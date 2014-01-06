@@ -28,23 +28,42 @@ angular.module('seaWebApp')
 
       $scope.personaLogin = function() {
           navigator.id.get(function(assertion) {
-              var verifyConfig = {
-                  url: "http://127.0.0.1:8001/verify",
-                  data: {'assertion':assertion},
-                  headers: {'Content-type': 'application/x-www-form-urlencoded'}
-              };
-              $http.post(verifyConfig)
+              var assParam = "assertion="+assertion;
+              $http({
+                  method: 'POST',
+                  url: 'http://127.0.0.1:8001/login',
+                  headers: {
+                      'Content-type': 'application/x-www-form-urlencoded',
+                  },
+                  data: assParam
+              })
               .success(function(data, status, headers, config) {
                   console.log('Successful login');
                   User.isLogged = true;
                   User.username = data.username;
+                  $http.defaults.headers.common['Authorization'] = 'Token ' + data.token;
                   $location.path( "/home" );
               })
-              .error(function(response) {
+              .error(function(data, status, headers, config) {
                   console.log('Failed login');
+                  console.log(data);
+                  console.log(config);
                   User.isLogged = false;
                   User.username = '';
               });
+          });
+      };
+
+      $scope.personaLogin2 = function() {
+          navigator.id.get(function(assertion) {
+              var xhr = new XMLHttpRequest();
+              xhr.open("POST", "http://127.0.0.1:8001/login", true);
+              var param = "assertion="+assertion;
+              xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+              xhr.setRequestHeader("Content-length", param.length);
+              xhr.setRequestHeader("Connection", "close");
+              xhr.send(param);
+              xhr.onload = handleVerificationResponse(xhr);
           });
       };
   });
