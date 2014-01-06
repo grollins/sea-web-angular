@@ -53,17 +53,4 @@ angular.module('seaWebApp')
               });
           });
       };
-
-      $scope.personaLogin2 = function() {
-          navigator.id.get(function(assertion) {
-              var xhr = new XMLHttpRequest();
-              xhr.open("POST", "http://127.0.0.1:8001/login", true);
-              var param = "assertion="+assertion;
-              xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-              xhr.setRequestHeader("Content-length", param.length);
-              xhr.setRequestHeader("Connection", "close");
-              xhr.send(param);
-              xhr.onload = handleVerificationResponse(xhr);
-          });
-      };
   });
