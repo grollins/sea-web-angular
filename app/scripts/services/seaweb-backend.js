@@ -25,7 +25,7 @@ angular.module('seaWebApp')
                   data: jobData
               })
           },
-          refreshJob: function() {
+          refreshJobs: function() {
               return $http({
                   method: 'GET',
                   url: 'http://localhost:8001/jobs/'

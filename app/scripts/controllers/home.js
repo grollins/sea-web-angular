@@ -27,19 +27,19 @@ angular.module('seaWebApp')
             .success(function(data, status, headers, config) {
                 $scope.status = status;
                 $log.debug('Job post success');
-                $scope.refreshJob();
+                $scope.refreshJobs();
             })
             .error(function(data, status, headers, config) {
                 $scope.status = status;
                 $log.debug('Job post failed');
-                $scope.refreshJob();
+                $scope.refreshJobs();
             });
             $scope.jobForm.$setPristine();
             $scope.job.title = '';
         };
 
-        $scope.refreshJob = function() {
-            SeawebBackend.refreshJob()
+        $scope.refreshJobs = function() {
+            SeawebBackend.refreshJobs()
             .success(function(data, status) {
                 $scope.status = status;
                 $scope.jobs = data.results;
@@ -52,5 +52,5 @@ angular.module('seaWebApp')
             });
         };
 
-        $scope.refreshJob();
+        $scope.refreshJobs();
     });
