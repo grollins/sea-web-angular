@@ -157,3 +157,9 @@ a.logout:hover {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.login-alert {
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 20px;
+}

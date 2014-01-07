@@ -13,7 +13,7 @@ angular.module('seaWebApp')
               var assertionParam = 'assertion='+assertion;
               return $http({
                   method: 'POST',
-                  url: backendParams.url + '/login',
+                  url: backendParams.url + '/login/',
                   headers: {
                       'Content-type': 'application/x-www-form-urlencoded',
                   },
