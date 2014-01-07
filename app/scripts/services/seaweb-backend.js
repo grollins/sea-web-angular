@@ -30,6 +30,18 @@ angular.module('seaWebApp')
                   method: 'GET',
                   url: 'http://localhost:8001/jobs/'
               })
+          },
+          getJobResults: function(jobId) {
+              return $http({
+                  method: 'GET',
+                  url: 'http://localhost:8001/jobs/' + jobId + '/'
+              })
+          },
+          deleteJob: function(jobId) {
+              return $http({
+                  method: 'DELETE',
+                  url: 'http://localhost:8001/jobs/' + jobId + '/'
+              })
           }
       }
   });
