@@ -1,13 +1,12 @@
 'use strict';
 
 angular.module('seaWebApp')
-    .controller('HomeCtrl', function($scope, $http, $location, User) {
+    .controller('HomeCtrl', function($scope, $http, User) {
         $scope.jobs = [];
-        $scope.users = [];
-        $scope.username = User.username;
+        $scope.username = User.username();
 
         $scope.job = {
-            title: "",
+            title: '',
             structureFile: null,
             topologyFile: null,
             iterations: 10,
@@ -18,29 +17,24 @@ angular.module('seaWebApp')
         };
 
         $scope.saveJob = function() {
-            // console.log($scope.job.title);
-            // console.log($scope.job.iterations);
-            // console.log($scope.job.structureFile);
-            // console.log($scope.job.topologyFile);
-
             var fd = new FormData();
-            fd.append("title", $scope.job.title);
-            fd.append("structure", $scope.job.structureFile);
-            fd.append("topology", $scope.job.topologyFile);
-            fd.append("iterations", $scope.job.iterations);
+            fd.append('title', $scope.job.title);
+            fd.append('structure', $scope.job.structureFile);
+            fd.append('topology', $scope.job.topologyFile);
+            fd.append('iterations', $scope.job.iterations);
 
-            $http.post( "http://localhost:8001/jobs/", fd, {
+            $http.post( 'http://localhost:8001/jobs/', fd, {
                 headers: {'Content-Type': undefined},
                 transformRequest: angular.identity
             }).
             success(function(data, status, headers, config) {
                 $scope.status = status;
-                console.log("Job post success");
+                console.log('Job post success');
                 $scope.refreshJob();
             }).
             error(function(data, status, headers, config) {
                 $scope.status = status;
-                console.log("Job post failed");
+                console.log('Job post failed');
                 console.log(data);
                 console.log(headers('Content-Type'));
                 console.log(config);
@@ -50,16 +44,16 @@ angular.module('seaWebApp')
         };
 
         $scope.refreshJob = function() {
-            $http({method: 'GET', url: "http://localhost:8001/jobs/"}).
+            $http({method: 'GET', url: 'http://localhost:8001/jobs/'}).
             success(function(data, status) {
                 $scope.status = status;
                 $scope.jobs = data.results;
-                console.log("Job refresh success");
+                console.log('Job refresh success');
             }).
             error(function(data, status) {
-                $scope.jobs = data || "Job refresh failed";
+                $scope.jobs = data || 'Job refresh failed';
                 $scope.status = status;
-                console.log("Job refresh failed");
+                console.log('Job refresh failed');
             });
         };
 

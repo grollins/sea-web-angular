@@ -1,20 +1,16 @@
 'use strict';
 
 angular.module('seaWebApp')
-    .controller('HeaderCtrl', function($scope, $http, $location, User) {
+    .controller('HeaderCtrl', function($scope, $location, User) {
         $scope.isActive = function (viewLocation) { 
             return viewLocation === $location.path();
         };
 
         $scope.isLoggedIn = function () {
-            return User.isLogged;
+            return User.isLoggedIn();
         };
 
         $scope.logout = function() {
-            User.username = '';
-            User.isLogged = false;
-            $http.defaults.headers.common['Authorization'] = ''
-            $location.path( "/login" );
+            User.logout();
         };
-
     });

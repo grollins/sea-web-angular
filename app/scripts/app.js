@@ -32,14 +32,14 @@ angular.module('seaWebApp', ['ngRoute'])
   })
   .run( function($rootScope, $location, User) {
       // register listener to watch route changes
-      $rootScope.$on( "$routeChangeStart", function(event, next, current) {
-          if ( User.isLogged == false ) {
+      $rootScope.$on( '$routeChangeStart', function(event, next, current) {
+          if ( User.isLoggedIn() === false ) {
               // not a logged user, we should be going to #login
-              if ( next.templateUrl == "views/login.html" ) {
+              if ( next.templateUrl === 'views/login.html' ) {
                   // already going to #login, no redirect needed
               } else {
                   // not going to #login, we should redirect now
-                  $location.path( "/login" );
+                  $location.path( '/login' );
               }
           }
       })

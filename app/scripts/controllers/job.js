@@ -27,7 +27,7 @@ angular.module('seaWebApp')
             $http({method: 'DELETE', url:'http://localhost:8001/jobs/' + $scope.jobId + '/'}).
             success(function() {
                 console.log('Job deleted');
-                $location.path( "/home" );
+                $location.path( '/home' );
             }).
             error(function() {
                 console.log('Job deletion failed');
