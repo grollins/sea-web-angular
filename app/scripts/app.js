@@ -40,4 +40,11 @@ angular.module('seaWebApp', ['ngRoute'])
               }
           }
       })
+  })
+  .config( function($provide) {
+      $provide.decorator('$log', function($delegate, $sniffer) {
+          $delegate.debug = function(message) { };
+          return $delegate;
+      });
   });
+
