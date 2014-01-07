@@ -2,12 +2,18 @@
 
 angular.module('seaWebApp')
   .factory('SeawebBackend', function ($http) {
+      var backendParams = {
+          url: '',
+      };
       return {
+          setLocation: function(backendLocation) {
+              backendParams.url = backendLocation;
+          },
           verifyAssertion: function(assertion) {
               var assertionParam = 'assertion='+assertion;
               return $http({
                   method: 'POST',
-                  url: 'http://localhost:8001/login',
+                  url: backendParams.url + '/login',
                   headers: {
                       'Content-type': 'application/x-www-form-urlencoded',
                   },
@@ -17,7 +23,7 @@ angular.module('seaWebApp')
           saveJob: function(jobData) {
               return $http({
                   method: 'POST',
-                  url: 'http://localhost:8001/jobs/',
+                  url: backendParams.url + '/jobs/',
                   headers: {
                       'Content-Type': undefined,
                   },
@@ -28,19 +34,19 @@ angular.module('seaWebApp')
           refreshJobs: function() {
               return $http({
                   method: 'GET',
-                  url: 'http://localhost:8001/jobs/'
+                  url: backendParams.url + '/jobs/'
               })
           },
           getJobResults: function(jobId) {
               return $http({
                   method: 'GET',
-                  url: 'http://localhost:8001/jobs/' + jobId + '/'
+                  url: backendParams.url + '/jobs/' + jobId + '/'
               })
           },
           deleteJob: function(jobId) {
               return $http({
                   method: 'DELETE',
-                  url: 'http://localhost:8001/jobs/' + jobId + '/'
+                  url: backendParams.url + '/jobs/' + jobId + '/'
               })
           }
       }

@@ -27,6 +27,12 @@ angular.module('seaWebApp', ['ngRoute'])
         redirectTo: '/home'
       });
   })
+  .config( function($provide) {
+      $provide.decorator('$log', function($delegate, $sniffer) {
+          $delegate.debug = function(message) { };
+          return $delegate;
+      });
+  })
   .run( function($rootScope, $location, User) {
       // register listener to watch route changes
       $rootScope.$on( '$routeChangeStart', function(event, next, current) {
@@ -41,10 +47,7 @@ angular.module('seaWebApp', ['ngRoute'])
           }
       })
   })
-  .config( function($provide) {
-      $provide.decorator('$log', function($delegate, $sniffer) {
-          $delegate.debug = function(message) { };
-          return $delegate;
-      });
+  .run( function(SeawebBackend) {
+      SeawebBackend.setLocation('http://localhost:8001');
   });
 
