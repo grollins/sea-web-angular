@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('seaWebApp')
-    .controller('JobCtrl', function($scope, $http, $location, $routeParams) {
+    .controller('JobCtrl', function($scope, $log, $http, $location, $routeParams) {
         $scope.jobId = $routeParams.jobId;
         $scope.jobDone = false;
 
@@ -11,7 +11,7 @@ angular.module('seaWebApp')
                 $scope.status = status;
                 $scope.jobData = data;
                 $scope.result = data.result[0];
-                console.log('Job refresh success');
+                $log.debug('Job refresh success');
                 if (data.status === 'Done') {
                     $scope.jobDone = true;
                 }
@@ -19,18 +19,18 @@ angular.module('seaWebApp')
             error(function(data, status) {
                 $scope.jobData = data || 'Job refresh failed';
                 $scope.status = status;
-                console.log('Job refresh failed');
+                $log.debug('Job refresh failed');
             });
         };
 
         $scope.deleteJob = function() {
             $http({method: 'DELETE', url:'http://localhost:8001/jobs/' + $scope.jobId + '/'}).
             success(function() {
-                console.log('Job deleted');
+                $log.debug('Job deleted');
                 $location.path( '/home' );
             }).
             error(function() {
-                console.log('Job deletion failed');
+                $log.debug('Job deletion failed');
             });
         };
 
