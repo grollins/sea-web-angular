@@ -1,9 +1,6 @@
 'use strict';
 
 angular.module('seaWebApp', ['ngRoute'])
-  .config(function($httpProvider){
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
-  })
   .config(function ($routeProvider) {
     $routeProvider
       .when('/home', {
