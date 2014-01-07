@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('seaWebApp')
-    .controller('HomeCtrl', function($scope, $http, User) {
+    .controller('HomeCtrl', function($scope, $log, SeawebBackend, User) {
         $scope.jobs = [];
         $scope.username = User.username();
 
@@ -23,37 +23,32 @@ angular.module('seaWebApp')
             fd.append('topology', $scope.job.topologyFile);
             fd.append('iterations', $scope.job.iterations);
 
-            $http.post( 'http://localhost:8001/jobs/', fd, {
-                headers: {'Content-Type': undefined},
-                transformRequest: angular.identity
-            }).
-            success(function(data, status, headers, config) {
+            SeawebBackend.saveJob(fd)
+            .success(function(data, status, headers, config) {
                 $scope.status = status;
-                console.log('Job post success');
+                $log.debug('Job post success');
                 $scope.refreshJob();
-            }).
-            error(function(data, status, headers, config) {
+            })
+            .error(function(data, status, headers, config) {
                 $scope.status = status;
-                console.log('Job post failed');
-                console.log(data);
-                console.log(headers('Content-Type'));
-                console.log(config);
+                $log.debug('Job post failed');
+                $scope.refreshJob();
             });
             $scope.jobForm.$setPristine();
             $scope.job.title = '';
         };
 
         $scope.refreshJob = function() {
-            $http({method: 'GET', url: 'http://localhost:8001/jobs/'}).
-            success(function(data, status) {
+            SeawebBackend.refreshJob()
+            .success(function(data, status) {
                 $scope.status = status;
                 $scope.jobs = data.results;
-                console.log('Job refresh success');
-            }).
-            error(function(data, status) {
+                $log.debug('Job refresh success');
+            })
+            .error(function(data, status) {
                 $scope.jobs = data || 'Job refresh failed';
                 $scope.status = status;
-                console.log('Job refresh failed');
+                $log.debug('Job refresh failed');
             });
         };
 

@@ -26,4 +26,4 @@ angular.module('seaWebApp')
               $location.path( '/login' );
           }
       }
-    });
+  });
