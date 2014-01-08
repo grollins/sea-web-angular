@@ -2,6 +2,9 @@
 
 angular.module('seaWebApp')
     .controller('HomeCtrl', function($scope, $log, SeawebBackend, User) {
+        $scope.submissionFailed = false;
+        $scope.submissionSucceeded = false;
+        $scope.submissionStatus = '';
         $scope.jobs = [];
         $scope.username = User.username();
 
@@ -16,6 +19,12 @@ angular.module('seaWebApp')
             iterations: [10, 25, 50, 100, 500],
         };
 
+        $scope.closeAlert = function() {
+            $scope.submissionFailed = false;
+            $scope.submissionSucceeded = false;
+            $scope.submissionStatus = '';
+        };
+
         $scope.saveJob = function() {
             var fd = new FormData();
             fd.append('title', $scope.job.title);
@@ -28,11 +37,14 @@ angular.module('seaWebApp')
                 $scope.status = status;
                 $log.debug('Job post success');
                 $scope.refreshJobs();
+                $scope.submissionSucceeded = true;
             })
             .error(function(data, status, headers, config) {
                 $scope.status = status;
                 $log.debug('Job post failed');
                 $scope.refreshJobs();
+                $scope.submissionFailed = true;
+                $scope.submissionStatus = status;
             });
             $scope.jobForm.$setPristine();
             $scope.job.title = '';

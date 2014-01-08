@@ -57,5 +57,13 @@
                 </div>
             </div>
         </form>
+        <div class="alert alert-danger alert-dismissable job-submission-alert" ng-show="submissionFailed">
+            <button type="button" class="close" aria-hidden="true" ng-click="closeAlert()">&times;</button>
+            <strong>Job Submission Failed</strong> ({{submissionStatus}} error)<br>If problem persists, please contact admin.
+        </div>
+        <div class="alert alert-success alert-dismissable job-submission-alert" ng-show="submissionSuccess">
+            <button type="button" class="close" aria-hidden="true" ng-click="closeAlert()">&times;</button>
+            <strong>Job Submitted</strong>
+        </div>
     </div>
 </div>
