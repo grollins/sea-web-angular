@@ -48,7 +48,7 @@ angular.module('seaWebApp', ['ngRoute'])
       })
   })
   .run( function(SeawebBackend) {
-      SeawebBackend.setLocation('http://localhost:8001');
-      // SeawebBackend.setLocation('');
+      // SeawebBackend.setLocation('http://localhost:8001');
+      SeawebBackend.setLocation('https://api.seaweb.grollins.webfactional.com');
   });
 

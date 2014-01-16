@@ -12,7 +12,7 @@ angular.module('seaWebApp')
                 $scope.jobData = data;
                 $scope.result = data.result[0];
                 $log.debug('Job refresh success');
-                if (data.status === 'Done') {
+                if (data.status === 'done') {
                     $scope.jobDone = true;
                 }
             })
