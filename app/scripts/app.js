@@ -28,10 +28,10 @@ angular.module('seaWebApp', ['ngRoute'])
       });
   })
   .config( function($provide) {
-      $provide.decorator('$log', function($delegate, $sniffer) {
-          $delegate.debug = function(message) { };
-          return $delegate;
-      });
+      $provide.decorator('$log', ['$delegate', function($delegate) {
+                $delegate.debug = function(message) { };
+                return $delegate;
+            }]);
   })
   .run( function($rootScope, $location, User) {
       // register listener to watch route changes
@@ -48,7 +48,7 @@ angular.module('seaWebApp', ['ngRoute'])
       })
   })
   .run( function(SeawebBackend) {
-      // SeawebBackend.setLocation('http://localhost:8001');
-      SeawebBackend.setLocation('https://api.seaweb.grollins.webfactional.com');
+      SeawebBackend.setLocation('http://localhost:8001');
+      // SeawebBackend.setLocation('https://api.seaweb.grollins.webfactional.com');
   });
 
