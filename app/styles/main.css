@@ -109,6 +109,10 @@ a.logout:hover {
     font-size: 18px;
 }
 
+#job-total-row td {
+    font-size: 24px;
+}
+
 #contact h2 {
     margin-bottom: 15px;
 }
@@ -162,4 +166,8 @@ a.logout:hover {
     max-width: 500px;
     margin: 0 auto;
     margin-top: 20px;
+}
+
+#about-sea {
+    line-height: 20px;
 }
