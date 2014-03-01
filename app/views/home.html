@@ -25,7 +25,7 @@
         <button class="btn btn-default" type="button" ng-click="refreshJobs()">Refresh Job List</button>
     </div>
     <div class="col-lg-6" id="home-job-submission">
-        <form class="form-horizontal" name="jobForm" novalidate>
+        <form class="form-horizontal" name="jobForm">
             <div class="form-group">
                 <label class="col-sm-4 control-label">Job Title</label>
                 <div class="col-sm-8">
@@ -53,7 +53,7 @@
             <div class="form-group">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-8">
-                    <button type="submit" class="btn btn-block btn-default" ng-click="saveJob(job)">Submit</button>
+                    <button type="submit" class="btn btn-block btn-default" ng-click="saveJob(job)" ng-disabled="!job.title">Submit</button>
                 </div>
             </div>
         </form>
