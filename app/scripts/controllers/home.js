@@ -12,11 +12,15 @@ angular.module('seaWebApp')
             title: '',
             structureFile: null,
             topologyFile: null,
+            calculationType: 'dipole',
             iterations: 10,
+            surfaceDetail: 8
         };
 
         $scope.options = {
+            calcType: ['dipole', 'quadrupole'],
             iterations: [10, 25, 50, 100, 500],
+            surfDetail: [4, 8, 12, 16]
         };
 
         $scope.closeAlert = function() {
@@ -30,7 +34,9 @@ angular.module('seaWebApp')
             fd.append('title', $scope.job.title);
             fd.append('structure', $scope.job.structureFile);
             fd.append('topology', $scope.job.topologyFile);
+            fd.append('calculation_type', $scope.job.calculationType);
             fd.append('iterations', $scope.job.iterations);
+            fd.append('surface_detail', $scope.job.surfaceDetail);
 
             SeawebBackend.saveJob(fd)
             .success(function(data, status, headers, config) {

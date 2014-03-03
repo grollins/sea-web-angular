@@ -45,9 +45,21 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-sm-4 control-label">Calculation Type</label>
+                <div class="col-sm-8 job-input">
+                    <select ng-model="job.calculationType" ng-options="choice for choice in options.calcType"></select>
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-sm-4 control-label">Iterations</label>
                 <div class="col-sm-8 job-input">
                     <select ng-model="job.iterations" ng-options="choice for choice in options.iterations"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Surface Detail</label>
+                <div class="col-sm-8 job-input">
+                    <select ng-model="job.surfaceDetail" ng-options="choice for choice in options.surfDetail"></select>
                 </div>
             </div>
             <div class="form-group">
