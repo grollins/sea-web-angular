@@ -1,7 +1,5 @@
-/* Space out content a bit */
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 100px;
   font-family: 'Open Sans', sans-serif;
   background-color: #fff;
 }
@@ -53,9 +51,8 @@ a.logout:hover {
 }
 
 .container {
-    max-width: 800px;
-    background-color: #fff;
-  }
+    max-width: 900px;
+}
 
 .container-narrow > hr {
   margin: 30px 0;
