@@ -48,7 +48,7 @@ angular.module('seaWebApp', ['ngRoute'])
       })
   })
   .run( function(SeawebBackend) {
-      // SeawebBackend.setLocation('http://198.199.97.60');
-      SeawebBackend.setLocation('http://127.0.0.1:8001');
+      SeawebBackend.setLocation('http://198.199.97.60');
+      // SeawebBackend.setLocation('http://127.0.0.1:8001');
   });
 
