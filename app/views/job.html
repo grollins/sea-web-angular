@@ -1,26 +1,47 @@
 <div class="container" id="job-details">
     <div class="row">
-        <div class="col-lg-12">
+        <div>
             <a href="#/home"><span class="glyphicon glyphicon-arrow-left"></span>Back to Home</a>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12" id="job-details-header">
+
+        <div id="job-details-header">
             <ul>
                 <li>{{jobData.title}}</li>
-                <li>{{jobData.status}}</li>
+                <li class="pull-right">{{jobData.status}}</li>
             </ul>
         </div>
-    </div>
-    <div class="row" ng-show="jobDone">
-        <div class="col-lg-12" id="job-details-results">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Quantity</th>
-                        <th>Energy (kcal/mol)</th>
-                    </tr>
-                </thead>
+
+        <div class="panel panel-default">
+        <div class="panel-heading">Input Parameters</div>
+        <table class="table table-striped job-details-table">
+            <tbody>
+                <tr>
+                    <td>Structure</td>
+                    <td>{{jobData.structure_filename}}</td>
+                </tr>
+                <tr>
+                    <td>Topology</td>
+                    <td>{{jobData.topology_filename}}</td>
+                </tr>
+                <tr>
+                    <td>Calculation Type</td>
+                    <td>{{jobData.calculation_type}}</td>
+                </tr>
+                <tr>
+                    <td>Iterations</td>
+                    <td>{{jobData.iterations}}</td>
+                </tr>
+                <tr>
+                    <td>Surface Detail</td>
+                    <td>{{jobData.surface_detail}}</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="panel panel-default">
+        <div class="panel-heading">Results (kcal/mol)</div>
+        <table class="table table-striped job-details-table" ng-show="jobDone">
                 <tbody>
                     <tr id="job-total-row">
                         <td>Total</td>
@@ -59,11 +80,10 @@
                         <td>{{result.shell_zero_waters}}</td>
                     </tr>
                 </tbody>
-            </table>
+        </table>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12" id="job-details-buttons">
+
+        <div id="job-details-buttons">
             <button class="btn btn-primary" type="button" ng-click="refreshJob()">Refresh</button>
             <button class="btn btn-primary" type="button" ng-click="exportCSV()">Export to CSV</button>
             <button class="btn btn-danger pull-right" type="button" ng-click="deleteJob()">Delete</button>
