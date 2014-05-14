@@ -42,10 +42,11 @@
             <li><a href="http://interacto.me">interacto.me</a></li>
           </ul>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </nav>
 
-    <div class="container">
+    <section id="seaweb-header">
+      <div class="container">
         <div class="header" ng-controller="HeaderCtrl">
             <ul class="nav nav-pills pull-right" ng-show="isLoggedIn()" ng-cloak>
                 <li ng-class="{ active: isActive('/home')}"><a href="#/home"><span class="glyphicon glyphicon-home"></span>Home</a></li>
@@ -55,27 +56,45 @@
             </ul>
             <h1 class="text-muted">SEA-web</h1>
         </div>
+      </div>
+    </section>
 
-        <div class="main">
+    <section class="main">
+        <div class="container">
             <div ng-view></div>
         </div>
+    </section>
 
-        <div class="footer">
-          <span>&copy; <a href="http://geoffrollins.com">Geoff Rollins</a>, 2014</span>
-          <span class="pull-right">Powered by <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> and <a href="http://angularjs.org/" target="_blank">AngularJS</a>.</span>
+    <section id="user-guide">
+        <div class="container">
+          <h3>What is this?</h3>
+          <p>Using this web app, you can compute the solvation free energy of a small molecule using our Semi-Explicit Assembly (SEA) solvation model. All you'll need is a <a href="http://manual.gromacs.org/current/online/gro.html" target="_blank">.gro file</a> and a <a href="http://manual.gromacs.org/current/online/top.html" target="_blank">.top file</a> for your molecule of interest.</p>
+
+          <h3>How to use SEA-web</h3>
+          <ol>
+            <li>Click the Persona button to login. You can login with any valid email address.</li>
+            <li>After logging in, you'll see the SEA-web Home page. The left side is a list of your SEA-web jobs. If this is your first time logging in, the list will be empty. The right side is the job submission form, from which you can launch new SEA calculations.</li>
+            <li>To submit a job, first specify a title for your job. Then, click the <code>Choose File</code> button in the "Structure File" field. In the dialog that appears, select the .gro file for your molecule of interest from your computer.</li>
+            <li>Repeat the file selection process for the "Topology File" field. This file should be a .top file that matches your .gro file.</li>
+            <li>The remaining fields allow you to adjust the type of calculation, the minimum number of solvation iterations to run, and the level of detail used to define atomic surfaces.</li>
+            <li>Click the <code>Submit</code> button. Your job will appear in the job list on the left side of the interface with a status of "submitted".</li>
+            <li>Clicking <code>Refresh Job List</code> will refresh the status of your jobs. When your job is complete, the status will change from "submitted" to "done" (usually only takes a minute or two). At that point, you can click on the name of your job and view the results.</li>
+            <li>The results page summarizes your input parameters and the results. The total solvation free energy is listed first in the "Results" table, followed by several components of the total free energy.</li>
+            <li>To save your job to a file, click the <code>Export to CSV</code> button. You can also click the <code>Delete</code> button to remove the job from your list if you no longer need the results. <strong>Note: deleted jobs are not recoverable so delete with care.</strong></li>
+          </ol>
         </div>
-    </div>
+    </section>
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
+    <footer>
+      <div class="container">
+        <span>&copy; <a href="http://geoffrollins.com" target="_blank">Geoff Rollins</a>, 2014</span>
+        <span class="pull-right">Powered by <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> and <a href="http://angularjs.org/" target="_blank">AngularJS</a>.</span>
+        <br>
+        <span>For technical support contact:<br>
+          <img src="images/contact.png" alt="">
+        </span>
+      </div>
+    </footer>
 
     <script src="https://login.persona.org/include.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
